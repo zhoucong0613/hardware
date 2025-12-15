@@ -16,7 +16,7 @@
 
 /* camera control gpio definitions */
 / {
-	overlay-name = "Jetson Fpga Camera Connor";
+	overlay-name = "Jetson isx Camera Connor";
     jetson-header-name = "Jetson 24pin CSI Connector";
     compatible = JETSON_COMPATIBLE_P3768;
 
@@ -26,7 +26,7 @@
 		__overlay__ {
 			connor {
 				branch {
-					label = "stereo_camera_fpga_v1.0_20251009";
+					label = "fish_camera_isx_v1.0_20251211";
 				};
 			};
 			tegra-capture-vi {
@@ -36,45 +36,45 @@
 					port@0 {
 						status = "okay";
 						reg = <0>;
-						fpga_vi_in0: endpoint {
+						isx_vi_in0: endpoint {
 							status = "okay";
 							vc-id = <0>;
 							port-index = <2>;
 							bus-width = <4>;
-							remote-endpoint = <&fpga_csi_out0>;
+							remote-endpoint = <&isx_csi_out0>;
 						};
 					};
 					port@1 {
 						status = "okay";
 						reg = <1>;
-						fpga_vi_in1: endpoint {
+						isx_vi_in1: endpoint {
 							status = "okay";
 							vc-id = <1>;
 							port-index = <2>;
 							bus-width = <4>;
-							remote-endpoint = <&fpga_csi_out1>;
+							remote-endpoint = <&isx_csi_out1>;
 						};
 					};
 					port@2 {
 						status = "okay";
 						reg = <2>;
-						fpga_vi_in2: endpoint {
+						isx_vi_in2: endpoint {
 							status = "okay";
 							vc-id = <0>;
 							port-index = <1>;
 							bus-width = <2>;
-							remote-endpoint = <&fpga_csi_out2>;
+							remote-endpoint = <&isx_csi_out2>;
 						};
 					};
 					port@3 {
 						status = "okay";
 						reg = <3>;
-						fpga_vi_in3: endpoint {
+						isx_vi_in3: endpoint {
 							status = "okay";
 							vc-id = <1>;
 							port-index = <1>;
 							bus-width = <2>;
-							remote-endpoint = <&fpga_csi_out3>;
+							remote-endpoint = <&isx_csi_out3>;
 						};
 					};
 				};
@@ -106,19 +106,19 @@
 								port@0 {
 									status = "okay";
 									reg = <0>;
-									fpga_csi_in0: endpoint {
+									isx_csi_in0: endpoint {
 										status = "okay";
 										port-index = <2>;
 										bus-width = <4>;
-										remote-endpoint = <&fpga_cam_out0>;
+										remote-endpoint = <&isx_cam_out0>;
 									};
 								};
 								port@1 {
 									status = "okay";
 									reg = <1>;
-									fpga_csi_out0: endpoint {
+									isx_csi_out0: endpoint {
 										status = "okay";
-										remote-endpoint = <&fpga_vi_in0>;
+										remote-endpoint = <&isx_vi_in0>;
 									};
 								};
 							};
@@ -133,19 +133,19 @@
 								port@0 {
 									status = "okay";
 									reg = <0>;
-									fpga_csi_in1: endpoint {
+									isx_csi_in1: endpoint {
 										status = "okay";
 										port-index = <2>;
 										bus-width = <4>;
-										remote-endpoint = <&fpga_cam_out1>;
+										remote-endpoint = <&isx_cam_out1>;
 									};
 								};
 								port@1 {
 									status = "okay";
 									reg = <1>;
-									fpga_csi_out1: endpoint {
+									isx_csi_out1: endpoint {
 										status = "okay";
-										remote-endpoint = <&fpga_vi_in1>;
+										remote-endpoint = <&isx_vi_in1>;
 									};
 								};
 							};
@@ -160,19 +160,19 @@
 								port@0 {
 									status = "okay";
 									reg = <0>;
-									fpga_csi_in2: endpoint {
+									isx_csi_in2: endpoint {
 										status = "okay";
 										port-index = <1>;
 										bus-width = <2>;
-										remote-endpoint = <&fpga_cam_out2>;
+										remote-endpoint = <&isx_cam_out2>;
 									};
 								};
 								port@1 {
 									status = "okay";
 									reg = <1>;
-									fpga_csi_out2: endpoint {
+									isx_csi_out2: endpoint {
 										status = "okay";
-										remote-endpoint = <&fpga_vi_in2>;
+										remote-endpoint = <&isx_vi_in2>;
 									};
 								};
 							};
@@ -187,19 +187,19 @@
 								port@0 {
 									status = "okay";
 									reg = <0>;
-									fpga_csi_in3: endpoint {
+									isx_csi_in3: endpoint {
 										status = "okay";
 										port-index = <1>;
 										bus-width = <2>;
-										remote-endpoint = <&fpga_cam_out3>;
+										remote-endpoint = <&isx_cam_out3>;
 									};
 								};
 								port@1 {
 									status = "okay";
 									reg = <1>;
-									fpga_csi_out3: endpoint {
+									isx_csi_out3: endpoint {
 										status = "okay";
-										remote-endpoint = <&fpga_vi_in3>;
+										remote-endpoint = <&isx_vi_in3>;
 									};
 								};
 							};
@@ -221,23 +221,23 @@
 						status = "okay";
 						dser_0: max96724 {
 							status = "okay";
-							compatible = "Connor,fpga_max96724";
+							compatible = "Connor,isx_max96724";
 							reg = <0x27>;
 							is-master;
 						};
-						fpga_a {
+						isx_a {
 							status = "okay";
-							def-addr = <0x3c>; /* actual i2c address of sensor */
+							def-addr = <0x1a>; /* actual i2c address of sensor */
 							nvidia,gmsl-dser-device = <&dser_0>;
 							des-link = "A";
 
-							compatible = "Connor,fpga_max9295";
+							compatible = "Connor,isx_max9295";
 
 							reg = <0x14>; /* 9295 will translate to this i2c address */
 
 							physical_w = "15.0";
 							physical_h = "12.5";
-							sensor_model ="fpga";
+							sensor_model ="isx";
 							post_crop_frame_drop = "0";
 							use_decibel_gain = "true";
 
@@ -246,7 +246,7 @@
 
 							mode0 {
 								mclk_khz = "24000";
-								num_lanes = "4";
+								num_lanes = "2";
 								tegra_sinterface = "serial_a";
 								vc_id = "0";
 								discontinuous_clk = "no";
@@ -255,16 +255,15 @@
 								dynamic_pixel_bit_depth = "16";
 								csi_pixel_bit_depth = "16"; 
 								mode_type = "yuv";
-								pixel_phase = "yuyv";
+								pixel_phase = "uyvy";
 
-
-								active_w = "3840";
-								active_h = "1080";
+								active_w = "1920";
+								active_h = "1536";
 								readout_orientation = "0";
-								line_length = "4400";
+								line_length = "2200";
 								inherent_gain = "1";
-								pix_clk_hz = "300000000";
-								serdes_pix_clk_hz = "2450000000";
+								pix_clk_hz = "165000000";
+								serdes_pix_clk_hz = "800000000";
 
 								gain_factor = "10";
 								min_gain_val = "0"; /* dB */
@@ -291,11 +290,11 @@
 								#size-cells = <0>;
 								port@0 {
 									reg = <0>;
-									fpga_cam_out0: endpoint {
+									isx_cam_out0: endpoint {
 										vc-id = <0>;
 										port-index = <2>;
 										bus-width = <4>;
-										remote-endpoint = <&fpga_csi_in0>;
+										remote-endpoint = <&isx_csi_in0>;
 									};
 								};
 							};
@@ -304,19 +303,19 @@
 								streams = "yuv16";
 							};
 						};
-						fpga_b {
+						isx_b {
 							status = "okay";
-							def-addr = <0x3c>; /* actual i2c address of sensor */
+							def-addr = <0x1a>; /* actual i2c address of sensor */
 							nvidia,gmsl-dser-device = <&dser_0>;
 							des-link = "B";
 
-							compatible = "Connor,fpga_max9295";
+							compatible = "Connor,isx_max9295";
 
 							reg = <0x15>; /* 9295 will translate to this i2c address */
 
 							physical_w = "15.0";
 							physical_h = "12.5";
-							sensor_model ="fpga";
+							sensor_model ="isx";
 							post_crop_frame_drop = "0";
 							use_decibel_gain = "true";
 
@@ -325,9 +324,9 @@
 							
 							mode0 {
 								mclk_khz = "24000";
-								num_lanes = "4";
+								num_lanes = "2";
 								tegra_sinterface = "serial_a";
-								vc_id = "1";
+								vc_id = "2";
 								discontinuous_clk = "no";
 								dpcm_enable = "false";
 								cil_settletime = "0";
@@ -336,14 +335,13 @@
 								mode_type = "yuv";
 								pixel_phase = "uyvy";
 
-
-								active_w = "3840";
-								active_h = "1080";
+								active_w = "1920";
+								active_h = "1536";
 								readout_orientation = "0";
-								line_length = "4400";
+								line_length = "2200";
 								inherent_gain = "1";
-								pix_clk_hz = "300000000";
-								serdes_pix_clk_hz = "1250000000";
+								pix_clk_hz = "165000000";
+								serdes_pix_clk_hz = "800000000";
 
 								gain_factor = "10";
 								min_gain_val = "0"; /* dB */
@@ -370,11 +368,11 @@
 								#size-cells = <0>;
 								port@0 {
 									reg = <0>;
-									fpga_cam_out1: endpoint {
+									isx_cam_out1: endpoint {
 										vc-id = <1>;
 										port-index = <2>;
 										bus-width = <4>;
-										remote-endpoint = <&fpga_csi_in1>;
+										remote-endpoint = <&isx_csi_in1>;
 									};
 								};
 							};
@@ -383,19 +381,19 @@
 								streams = "yuv16";
 							};
 						};
-						fpga_c {
+						isx_c {
 							status = "okay";
-							def-addr = <0x3c>; /* actual i2c address of sensor */
+							def-addr = <0x1a>; /* actual i2c address of sensor */
 							nvidia,gmsl-dser-device = <&dser_0>;
 							des-link = "C";
 
-							compatible = "Connor,fpga_max9295";
+							compatible = "Connor,isx_max9295";
 
 							reg = <0x16>; /* 9295 will translate to this i2c address */
 
 							physical_w = "15.0";
 							physical_h = "12.5";
-							sensor_model ="fpga";
+							sensor_model ="isx";
 							post_crop_frame_drop = "0";
 							use_decibel_gain = "true";
 
@@ -405,9 +403,9 @@
 							mode0 {
 								lane_polarity = "6";
 								mclk_khz = "24000";
-								num_lanes = "4";
+								num_lanes = "2";
 								tegra_sinterface = "serial_a";
-								vc_id = "0";
+								vc_id = "2";
 								discontinuous_clk = "no";
 								dpcm_enable = "false";
 								cil_settletime = "0";
@@ -416,14 +414,13 @@
 								mode_type = "yuv";
 								pixel_phase = "uyvy";
 
-
-								active_w = "3840";
-								active_h = "1080";
+								active_w = "1920";
+								active_h = "1536";
 								readout_orientation = "0";
-								line_length = "4400";
+								line_length = "2200";
 								inherent_gain = "1";
-								pix_clk_hz = "300000000";
-								serdes_pix_clk_hz = "1250000000";
+								pix_clk_hz = "165000000";
+								serdes_pix_clk_hz = "800000000";
 
 								gain_factor = "10";
 								min_gain_val = "0"; /* dB */
@@ -450,11 +447,11 @@
 								#size-cells = <0>;
 								port@0 {
 									reg = <0>;
-									fpga_cam_out2: endpoint {
+									isx_cam_out2: endpoint {
 										vc-id = <0>;
 										port-index = <1>;
 										bus-width = <2>;
-										remote-endpoint = <&fpga_csi_in2>;
+										remote-endpoint = <&isx_csi_in2>;
 									};
 								};
 							};
@@ -464,19 +461,19 @@
 							};
 						};
 
-						fpga_d {
+						isx_d {
 							status = "okay";
-							def-addr = <0x3c>; /* actual i2c address of sensor */
+							def-addr = <0x1a>; /* actual i2c address of sensor */
 							nvidia,gmsl-dser-device = <&dser_0>;
 							des-link = "D";
 
-							compatible = "Connor,fpga_max9295";
+							compatible = "Connor,isx_max9295";
 
 							reg = <0x17>; /* 9295 will translate to this i2c address */
 
 							physical_w = "15.0";
 							physical_h = "12.5";
-							sensor_model ="fpga";
+							sensor_model ="isx";
 							post_crop_frame_drop = "0";
 							use_decibel_gain = "true";
 
@@ -486,9 +483,9 @@
 							mode0 {
 								lane_polarity = "6";
 								mclk_khz = "24000";
-								num_lanes = "4";
+								num_lanes = "2";
 								tegra_sinterface = "serial_a";
-								vc_id = "1";
+								vc_id = "2";
 								discontinuous_clk = "no";
 								dpcm_enable = "false";
 								cil_settletime = "0";
@@ -497,14 +494,13 @@
 								mode_type = "yuv";
 								pixel_phase = "uyvy";
 
-
-								active_w = "3840";
-								active_h = "1080";
+								active_w = "1920";
+								active_h = "1536";
 								readout_orientation = "0";
-								line_length = "4400";
+								line_length = "2200";
 								inherent_gain = "1";
-								pix_clk_hz = "300000000";
-								serdes_pix_clk_hz = "1250000000";
+								pix_clk_hz = "165000000";
+								serdes_pix_clk_hz = "800000000";
 
 								gain_factor = "10";
 								min_gain_val = "0"; /* dB */
@@ -531,11 +527,11 @@
 								#size-cells = <0>;
 								port@0 {
 									reg = <0>;
-									fpga_cam_out3: endpoint {
+									isx_cam_out3: endpoint {
 										vc-id = <1>;
 										port-index = <1>;
 										bus-width = <2>;
-										remote-endpoint = <&fpga_csi_in3>;
+										remote-endpoint = <&isx_csi_in3>;
 									};
 								};
 							};

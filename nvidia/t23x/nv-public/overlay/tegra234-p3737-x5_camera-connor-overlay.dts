@@ -310,7 +310,7 @@
 							nvidia,gmsl-dser-device = <&dser_0>;
 							des-link = "B";
 
-							compatible = "Connor,x5_max9295d";
+							compatible = "Connor,x5_max9295";
 
 							reg = <0x15>; /* 9295 will translate to this i2c address */
 
@@ -389,7 +389,7 @@
 							nvidia,gmsl-dser-device = <&dser_0>;
 							des-link = "C";
 
-							compatible = "Connor,x5_max9295d";
+							compatible = "Connor,x5_max9295";
 
 							reg = <0x16>; /* 9295 will translate to this i2c address */
 
@@ -470,7 +470,7 @@
 							nvidia,gmsl-dser-device = <&dser_0>;
 							des-link = "D";
 
-							compatible = "Connor,x5_max9295d";
+							compatible = "Connor,x5_max9295";
 
 							reg = <0x17>; /* 9295 will translate to this i2c address */
 
